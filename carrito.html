@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Carrito de Compras</title>
+    <title>Mi Carrito de Compras - Proteina Activa</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Variables y Estilos Base (COPIADOS DE index.html) */
+        /* Variables y Estilos Base */
         :root {
             --primary-brown: #5C3A2E; 
             --secondary-brown: #7A4E3F; 
@@ -25,6 +25,7 @@
             background-color: var(--cream);
             color: var(--text-dark);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -33,130 +34,150 @@
             padding: 20px;
         }
 
-        /* Título de Página */
+        /* HEADER */
+        header {
+            background-color: var(--primary-brown);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--gold);
+        }
+
         h1 {
             font-family: 'Oswald', sans-serif;
             font-size: 3rem;
             color: var(--primary-brown);
-            margin-bottom: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        /* CARTO ITEMS */
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--text-light);
+            box-shadow: var(--shadow);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .cart-table th, .cart-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-table th {
+            background-color: var(--secondary-brown);
+            color: var(--text-light);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .cart-table td {
+            vertical-align: middle;
+        }
+
+        .cart-item-details {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-item-details img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .item-name {
+            font-weight: 700;
+            color: var(--primary-brown);
+        }
+        
+        .item-presentation {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             text-align: center;
         }
 
-        /* Contenedor Principal del Carrito */
-        .cart-layout {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #E74C3C;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
         }
-
-        /* Lista de Ítems */
-        .cart-items {
-            flex-grow: 1;
+        
+        .remove-btn:hover {
+            color: #C0392B;
+        }
+        
+        /* FOOTER DE TOTALES */
+        .cart-summary {
             background-color: var(--text-light);
             padding: 25px;
             border-radius: 10px;
             box-shadow: var(--shadow);
+            max-width: 400px;
+            float: right;
         }
-
-        .cart-item {
+        
+        .summary-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px dashed #ccc;
-        }
-        
-        .cart-item:last-child {
-            border-bottom: none;
+            padding: 8px 0;
         }
 
-        .item-details {
-            flex-grow: 1;
-        }
-
-        .item-details h4 {
-            margin: 0 0 5px 0;
-            font-weight: 700;
-            color: var(--primary-brown);
-            font-size: 1.1rem;
-        }
-
-        .item-details p {
-            margin: 0;
-            font-size: 0.9rem;
-            color: #777;
-        }
-
-        .item-quantity input {
-            width: 50px;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin: 0 10px;
-        }
-
-        .item-price, .item-subtotal {
-            font-weight: 700;
-            color: var(--text-dark);
-            width: 90px;
-            text-align: right;
-        }
-        
-        .remove-btn {
-            color: #E74C3C;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-left: 15px;
-        }
-        .remove-btn:hover {
-            color: var(--primary-brown);
-        }
-
-
-        /* Resumen de Compra */
-        .cart-summary {
-            width: 300px;
-            background-color: var(--primary-brown);
-            color: var(--text-light);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 20px; /* Para que se mantenga visible */
-        }
-        
-        .cart-summary h3 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-
-        .summary-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        .summary-total {
-            margin-top: 20px;
+        .summary-row.total {
+            border-top: 2px solid var(--gold);
+            margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px dashed #A0A0A0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: var(--gold);
+            color: var(--primary-brown);
         }
-
+        
         .checkout-btn {
             background-color: var(--gold);
             color: var(--primary-brown);
-            padding: 15px 20px;
-            border-radius: 5px;
+            padding: 15px 25px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1rem;
@@ -164,194 +185,293 @@
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
-        
+
         .checkout-btn:hover {
             background-color: #FFC300;
+            transform: scale(1.01);
         }
         
-        .continue-shopping {
-            display: block;
-            text-align: center;
-            margin-top: 15px;
-            color: var(--gold);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .empty-cart {
+        .empty-cart-message {
             text-align: center;
             padding: 50px;
-            background-color: var(--text-light);
+            border: 2px dashed #ccc;
             border-radius: 10px;
-            box-shadow: var(--shadow);
-        }
-        .empty-cart i {
-            font-size: 3rem;
-            color: #ccc;
-            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            font-size: 1.2rem;
+            color: #777;
+            margin-top: 30px;
         }
 
-        @media (max-width: 800px) {
-            .cart-layout {
-                flex-direction: column;
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .cart-table, .cart-table tbody, .cart-table tr, .cart-table td, .cart-table th {
+                display: block;
+            }
+            .cart-table thead {
+                display: none;
+            }
+            .cart-table tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            .cart-table td {
+                text-align: right;
+                border-bottom: 1px dotted #ccc;
+                position: relative;
+                padding-left: 50%;
+            }
+            .cart-table td:before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: 700;
+                color: var(--secondary-brown);
             }
             .cart-summary {
-                width: 100%;
-                position: static;
-            }
-        }
-        
-        @media (max-width: 500px) {
-             .cart-item {
-                flex-wrap: wrap;
-            }
-            .item-details {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-            .item-price, .item-subtotal {
-                width: auto;
-                text-align: left;
+                float: none;
+                max-width: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tu Carrito de Compras</h1>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">PROTEINA ACTIVA</a>
+                <a href="index.html" class="back-link"><i class="fas fa-chevron-left"></i> Volver a la Tienda</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Mi Carrito de Compras</h1>
         
-        <div id="cart-content">
-            <div class="cart-layout">
-                
-                <div class="cart-items">
-                    <div id="cart-list">
-                        </div>
-                    
-                    <div id="empty-message" class="empty-cart" style="display: none;">
-                        <i class="fas fa-shopping-basket"></i>
-                        <p>Tu carrito está vacío.</p>
-                        <a href="index.html" class="checkout-btn" style="width: auto;">Volver a la tienda</a>
-                    </div>
-                </div>
-                
-                <div class="cart-summary" id="summary-card" style="display: none;">
-                    <h3>Resumen de la Orden</h3>
-                    
-                    <div class="summary-line">
-                        <span>Subtotal de Productos:</span>
+        <div id="cart-display">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Producto</th>
+                        <th style="width: 15%;">Precio Unitario</th>
+                        <th style="width: 15%;">Cantidad</th>
+                        <th style="width: 15%;">Subtotal</th>
+                        <th style="width: 15%;">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    </tbody>
+            </table>
+
+            <div id="empty-cart" class="empty-cart-message" style="display: none;">
+                Tu carrito está vacío. ¡Añade algunos productos!
+            </div>
+            
+            <div id="summary-section" style="display: none;">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
                         <span id="summary-subtotal">$0.00</span>
                     </div>
-                    
-                    <div class="summary-line">
-                        <span>Envío (Estandar):</span>
-                        <span id="summary-shipping">$5.00</span>
+                    <div class="summary-row">
+                        <span>Envío:</span>
+                        <span id="summary-shipping">$0.00</span>
                     </div>
-                    
-                    <div class="summary-line summary-total">
+                    <div class="summary-row total">
                         <span>Total:</span>
                         <span id="summary-total">$0.00</span>
                     </div>
-                    
-                    <button class="checkout-btn" onclick="checkout()">
-                        <i class="fas fa-credit-card"></i> Finalizar Compra
-                    </button>
-                    <a href="index.html" class="continue-shopping">Continuar Comprando</a>
+                    <button class="checkout-btn">Finalizar Compra</button>
                 </div>
             </div>
         </div>
+    </main>
+    
+    <footer>
+        <div class="container" style="text-align: center; padding: 10px 0; background-color: var(--primary-brown); margin-top: 50px;">
+            <p style="color: #ccc; font-size: 0.8rem;">
+                © 2025 Proteina Activa.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Estructura de precios por defecto (debe coincidir con index.html y admin.html)
+        const DEFAULT_PRICES_DATA = [
+            { id: 'pres-cafe-500gr', price: 15.99 }, { id: 'pres-cafe-1kg', price: 28.99 }, { id: 'pres-cafe-2kg', price: 54.99 },
+            { id: 'pres-choc-500gr', price: 16.99 }, { id: 'pres-choc-1kg', price: 29.99 }, { id: 'pres-choc-2kg', price: 56.99 },
+            { id: 'pres-frut-500gr', price: 15.49 }, { id: 'pres-frut-1kg', price: 27.99 }, { id: 'pres-frut-2kg', price: 52.99 },
+            { id: 'pres-frroj-500gr', price: 16.49 }, { id: 'pres-frroj-1kg', price: 29.49 }, { id: 'pres-frroj-2kg', price: 55.99 },
+            { id: 'pres-capu-500gr', price: 16.99 }, { id: 'pres-capu-1kg', price: 29.99 }, { id: 'pres-capu-2kg', price: 56.99 }
+        ];
+
+        let priceMap = {};
+        let cart = [];
+
+        // --- FUNCIONES DE PRECIOS Y LOCAL STORAGE ---
+
+        // Función para cargar los precios actuales desde localStorage o usar los por defecto
+        function loadStorePrices() {
+            const storedPrices = localStorage.getItem('productPrices');
+            let pricesToUse = DEFAULT_PRICES_DATA;
+
+            if (storedPrices) {
+                try {
+                    pricesToUse = JSON.parse(storedPrices);
+                } catch (e) {
+                    pricesToUse = DEFAULT_PRICES_DATA;
+                }
+            }
+            
+            // Crea un mapa para buscar precios rápidamente por ID
+            priceMap = pricesToUse.reduce((acc, item) => {
+                acc[item.id] = item.price; 
+                return acc;
+            }, {});
+        }
         
-        <script>
-            let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
-            const SHIPPING_COST = 5.00; // Costo de envío fijo
+        // Carga los items del carrito desde localStorage
+        function loadCart() {
+            const storedCart = localStorage.getItem('shoppingCart');
+            cart = storedCart ? JSON.parse(storedCart) : [];
+        }
 
-            function renderCart() {
-                const cartList = document.getElementById('cart-list');
-                const emptyMessage = document.getElementById('empty-message');
-                const summaryCard = document.getElementById('summary-card');
-                cartList.innerHTML = '';
+        function saveCart() {
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        }
+
+        // --- FUNCIONES DE CÁLCULO Y RENDERIZACIÓN ---
+        
+        function calculateTotals() {
+            let subtotal = 0;
+            
+            // Calcula el subtotal usando los precios *actuales* del carrito (ya actualizados en renderCart)
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+            });
+
+            // Lógica simple de envío (ej: $10.00 si el subtotal es menor a $100)
+            const shipping = subtotal < 100 && subtotal > 0 ? 10.00 : 0.00;
+            const total = subtotal + shipping;
+
+            document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('summary-shipping').textContent = `$${shipping.toFixed(2)}`;
+            document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+        }
+        
+        // Devuelve la URL de la imagen basada en el ID del producto
+        function getImageUrl(productId) {
+            // Ejemplo: 'pres-cafe-1kg' -> 'cafe'
+            const flavorCode = productId.split('-')[1]; 
+            return `img/productos/${flavorCode}.jpg`;
+        }
+
+        function renderCart() {
+            loadStorePrices(); // Cargar los precios más recientes
+            loadCart();        // Cargar el carrito guardado
+
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            
+            if (cart.length === 0) {
+                document.getElementById('empty-cart').style.display = 'block';
+                document.getElementById('summary-section').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('empty-cart').style.display = 'none';
+            document.getElementById('summary-section').style.display = 'block';
+
+            cart.forEach((item, index) => {
+                let currentPrice = priceMap[item.id];
                 
-                if (cart.length === 0) {
-                    emptyMessage.style.display = 'block';
-                    summaryCard.style.display = 'none';
-                    return;
+                // Si el precio actual no se encuentra (producto eliminado o error), usamos el precio guardado
+                if (currentPrice === undefined) {
+                    currentPrice = item.price;
+                } else {
+                    // *** ESTA LÍNEA ES CRUCIAL PARA LA ACTUALIZACIÓN EN VIVO ***
+                    // Actualiza el precio del item en el carrito con el precio actual.
+                    item.price = currentPrice;
                 }
-                
-                emptyMessage.style.display = 'none';
-                summaryCard.style.display = 'block';
 
-                let cartSubtotal = 0;
-
-                cart.forEach(item => {
-                    const subtotal = item.price * item.quantity;
-                    cartSubtotal += subtotal;
-
-                    const cartItemHTML = `
-                        <div class="cart-item">
-                            <div class="item-details">
-                                <h4>${item.flavor} (${item.presentation})</h4>
-                                <p>Precio unitario: $${item.price.toFixed(2)}</p>
+                const itemSubtotal = currentPrice * item.quantity;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td data-label="Producto">
+                        <div class="cart-item-details">
+                            <img src="${getImageUrl(item.id)}" alt="${item.flavor}">
+                            <div>
+                                <div class="item-name">${item.flavor}</div>
+                                <div class="item-presentation">${item.presentation}</div>
                             </div>
-                            <div class="item-quantity">
-                                <button onclick="updateQuantity('${item.id}', -1)" style="padding: 5px 8px; border-radius: 5px;">-</button>
-                                <input type="number" value="${item.quantity}" min="1" readonly>
-                                <button onclick="updateQuantity('${item.id}', 1)" style="padding: 5px 8px; border-radius: 5px;">+</button>
-                            </div>
-                            <span class="item-subtotal">$${subtotal.toFixed(2)}</span>
-                            <button class="remove-btn" onclick="removeItem('${item.id}')"><i class="fas fa-times"></i></button>
                         </div>
-                    `;
-                    cartList.innerHTML += cartItemHTML;
-                });
-                
-                updateSummary(cartSubtotal);
+                    </td>
+                    <td data-label="Precio Unitario">$${currentPrice.toFixed(2)}</td>
+                    <td data-label="Cantidad">
+                        <input type="number" 
+                                class="quantity-input" 
+                                value="${item.quantity}" 
+                                min="1" 
+                                onchange="updateQuantity(${index}, this.value)">
+                    </td>
+                    <td data-label="Subtotal">$${itemSubtotal.toFixed(2)}</td>
+                    <td data-label="Eliminar">
+                        <button class="remove-btn" onclick="removeItem(${index})"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                `;
+                cartItemsContainer.appendChild(row);
+            });
+            
+            saveCart(); // Guarda el carrito con los precios actualizados
+            calculateTotals();
+        }
+
+        // --- FUNCIONES DE MANIPULACIÓN DEL CARRITO ---
+
+        function updateQuantity(index, newQuantity) {
+            const qty = parseInt(newQuantity);
+            if (qty > 0) {
+                cart[index].quantity = qty;
+                saveCart();
+                renderCart(); // Re-renderiza para recalcular el subtotal y total
+            } else {
+                // Si el usuario pone 0 o negativo, eliminamos el item
+                removeItem(index);
             }
+        }
 
-            function updateSummary(subtotal) {
-                const total = subtotal + SHIPPING_COST;
-                
-                document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-                document.getElementById('summary-shipping').textContent = `$${SHIPPING_COST.toFixed(2)}`;
-                document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+        function removeItem(index) {
+            if (confirm(`¿Estás seguro de que quieres eliminar ${cart[index].flavor} (${cart[index].presentation}) del carrito?`)) {
+                cart.splice(index, 1);
+                saveCart();
+                renderCart(); // Re-renderiza el carrito
             }
-
-            function updateQuantity(itemId, change) {
-                const itemIndex = cart.findIndex(item => item.id === itemId);
-
-                if (itemIndex > -1) {
-                    cart[itemIndex].quantity += change;
-                    
-                    if (cart[itemIndex].quantity <= 0) {
-                        removeItem(itemId); // Eliminar si la cantidad llega a cero
-                    } else {
-                        localStorage.setItem('shoppingCart', JSON.stringify(cart));
-                        renderCart(); // Re-renderizar para actualizar totales
-                    }
-                }
-            }
-
-            function removeItem(itemId) {
-                cart = cart.filter(item => item.id !== itemId);
-                localStorage.setItem('shoppingCart', JSON.stringify(cart));
+        }
+        
+        // --- EVENTO DE ACTUALIZACIÓN EN VIVO ---
+        
+        window.addEventListener('storage', (event) => {
+            // Si la clave 'productPrices' cambia (desde admin.html)
+            if (event.key === 'productPrices') {
+                console.log('Detectado cambio de precios desde otra pestaña. Actualizando carrito...');
+                // Llamamos a renderCart, que se encargará de:
+                // 1. Cargar los nuevos precios (loadStorePrices).
+                // 2. Re-renderizar el carrito usando los nuevos precios.
+                // 3. Actualizar los totales.
                 renderCart();
             }
+        });
 
-            function checkout() {
-                if (cart.length > 0) {
-                    alert('¡Compra Finalizada! Total a pagar: ' + document.getElementById('summary-total').textContent);
-                    // Aquí se integraría la lógica de pago real
-                    cart = []; // Vaciar el carrito después de la compra
-                    localStorage.removeItem('shoppingCart');
-                    renderCart();
-                } else {
-                    alert('Tu carrito está vacío.');
-                }
-            }
+        // --- INICIALIZACIÓN ---
 
-            // Inicializar la vista del carrito al cargar la página
-            document.addEventListener('DOMContentLoaded', renderCart);
-        </script>
-    </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart(); // Inicia la renderización al cargar la página
+        });
+    </script>
 </body>
 </html>
