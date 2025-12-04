@@ -745,6 +745,17 @@
             localStorage.removeItem('adminLoggedIn'); 
             window.location.href = 'carrito.html';
         }
+        
+        // Función añadida: Escucha cambios en localStorage desde otras pestañas
+        window.addEventListener('storage', (event) => {
+            // Solo actualiza si la clave 'productPrices' ha cambiado (desde admin.html)
+            if (event.key === 'productPrices') {
+                console.log('Precios actualizados desde otra pestaña.');
+                // Vuelve a cargar los nuevos precios desde localStorage
+                loadStorePrices();
+            }
+        });
+        
 
         // Inicializar al cargar la página
         document.addEventListener('DOMContentLoaded', () => {
