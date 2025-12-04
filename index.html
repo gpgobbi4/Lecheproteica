@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leche en Polvo Proteica - Tu Tienda Online</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variables y Estilos Base */
+        :root {
+            --primary-brown: #5C3A2E; 
+            --secondary-brown: #7A4E3F; 
+            --cream: #F5EFE1; 
+            --gold: #D4AF37; 
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--primary-brown);
+            color: var(--text-light);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold);
+        }
+
+        /* Carrito Icono */
+        #cart-link {
+            position: relative;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        #cart-count {
+            background-color: #E74C3C; 
+            color: white;
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.75rem;
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            font-weight: bold;
+        }
+
+        /* HERO SECTION (con Slideshow de Deportistas) */
+        .hero {
+            position: relative; 
+            overflow: hidden;
+            padding: 0; 
+            min-height: 550px; 
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); 
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; 
+        }
+
+        .hero-slideshow .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0; 
+            animation: fadeAnimation 20s infinite; 
+        }
+
+        /* Ajustes de animación para 3 imágenes de deportistas */
+        .hero-slideshow .slide:nth-child(1) { animation-delay: 0s; }
+        .hero-slideshow .slide:nth-child(2) { animation-delay: 6.66s; } 
+        .hero-slideshow .slide:nth-child(3) { animation-delay: 13.33s; }
+
+        @keyframes fadeAnimation {
+            0% { opacity: 0; transform: scale(1.05); }
+            10% { opacity: 1; transform: scale(1); }
+            30% { opacity: 1; transform: scale(1); }
+            40% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 0; transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; 
+            color: var(--text-light); 
+            background-color: rgba(0, 0, 0, 0.4); 
+            padding: 40px 60px;
+            border-radius: 15px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero-content h1 {
+            color: var(--gold); 
+        }
+        
+        /* Botones Generales */
+        .btn {
+            background-color: var(--gold);
+            color: var(--primary-brown);
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #FFC300;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* SECCIÓN GENERAL */
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--primary-brown);
+            margin-bottom: 50px;
+            position: relative;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: var(--gold);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* PRODUCT SECTION (CATALOG) */
+        .products-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            background-color: var(--text-light);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 0;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        /* Nuevo estilo para las imágenes de producto */
+        .product-card img {
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .product-info {
+            padding: 0 25px 25px;
+        }
+
+        .product-info h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-brown);
+            margin-bottom: 5px;
+        }
+        
+        .product-info .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-brown);
+            margin-bottom: 20px;
+        }
+
+        .product-info .options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        
+        .product-info .options .label-group {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .product-info .options .label-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .product-info .options select,
+        .product-info .options input[type="number"] {
+            padding: 12px;
+            border: 2px solid var(--secondary-brown);
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .product-info .options input[type="number"] {
+            width: 70px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--primary-brown);
+            color: var(--text-light);
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--gold);
+            color: var(--primary-brown);
+            transform: scale(1.02);
+        }
+
+        /* BENEFICIOS SECTION (NUEVOS ESTILOS) */
+        .benefits-section {
+            padding: 80px 0;
+            background-color: #EFE8DA; /* Fondo ligeramente diferente para destacar */
+        }
+        
+        .benefits-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .benefit-card {
+            background-color: var(--text-light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 350px;
+            text-align: center;
+            border-top: 4px solid var(--primary-brown);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .benefit-card i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            padding: 15px;
+        }
+        
+        .benefit-card h4 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--primary-brown);
+            margin-top: 0;
+        }
+
+        
+        /* Media Queries para diseño móvil */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            header {
+                padding: 0.8rem 0;
+            }
+            nav ul {
+                display: none; 
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .hero {
+                min-height: 400px;
+            }
+            .hero-content {
+                padding: 30px 40px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr; 
+                gap: 30px;
+            }
+            .product-info h3 {
+                font-size: 1.8rem;
+            }
+            .product-info .options {
+                flex-direction: row; 
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-info .options {
+                flex-direction: column; 
+            }
+            .product-info .options .label-group {
+                width: 100%;
+            }
+            .product-info .options input[type="number"] {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">PROTEINA ACTIVA</div>
+                <ul>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li>
+                        <span id="cart-link" onclick="goToCart()"> 
+                            <i class="fas fa-shopping-cart"></i> 
+                            <span id="cart-count">0</span>
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-slideshow">
+                <div class="slide" style="background-image: url('img/hero/deporte1.jpg');"></div>
+                <div class="slide" style="background-image: url('img/hero/deporte2.jpg');"></div>
+                <div class="slide" style="background-image: url('img/hero/deporte3.jpg');"></div>
+            </div>
+            <div class="hero-content">
+                <h1>¡Energía y Sabor en cada Scoop!</h1>
+                <p>Nuestra leche contiene proteínas y muchos otros beneficios con un sabor que te va a encantar</p>
+                <a href="#productos" class="btn">Comprar Ahora</a>
+            </div>
+        </section>
+
+        <section id="productos" class="products-section container">
+            <h2 class="section-title">Elige tu Sabor Favorito</h2>
+            <div class="product-grid">
+                
+                <div class="product-card" data-flavor="Café con Leche">
+                    <img src="img/productos/cafe.jpg" alt="Leche Proteica Sabor Café con Leche">
+                    <div class="product-info">
+                        <h3>Café con Leche</h3>
+                        <p class="price" data-id="price-cafe">$28.99</p> 
+                        <div class="options">
+                            <div class="label-group">
+                                <label for="pres-cafe">Presentación</label>
+                                <select name="presentation-cafe" id="pres-cafe" onchange="updatePrice(this)">
+                                    <option value="500gr" data-price="15.99" data-size="500 gr">500 gr</option>
+                                    <option value="1kg" data-price="28.99" data-size="1 kg" selected>1 kg</option>
+                                    <option value="2kg" data-price="54.99" data-size="2 kg">2 kg</option>
+                                </select>
+                            </div>
+                            <div class="label-group" style="flex-grow: 0;">
+                                <label for="qty-cafe">Cant.</label>
+                                <input type="number" id="qty-cafe" value="1" min="1" aria-label="Cantidad" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('cafe')">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-flavor="Chocolate">
+                    <img src="img/productos/chocolate.jpg" alt="Leche Proteica Sabor Chocolate">
+                    <div class="product-info">
+                        <h3>Chocolate</h3>
+                        <p class="price" data-id="price-choc">$29.99</p>
+                        <div class="options">
+                            <div class="label-group">
+                                <label for="pres-choc">Presentación</label>
+                                <select name="presentation-chocolate" id="pres-choc" onchange="updatePrice(this)">
+                                    <option value="500gr" data-price="16.99" data-size="500 gr">500 gr</option>
+                                    <option value="1kg" data-price="29.99" data-size="1 kg" selected>1 kg</option>
+                                    <option value="2kg" data-price="56.99" data-size="2 kg">2 kg</option>
+                                </select>
+                            </div>
+                            <div class="label-group" style="flex-grow: 0;">
+                                <label for="qty-choc">Cant.</label>
+                                <input type="number" id="qty-choc" value="1" min="1" aria-label="Cantidad" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('choc')">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-flavor="Frutilla">
+                    <img src="img/productos/frutilla.jpg" alt="Leche Proteica Sabor Frutilla">
+                    <div class="product-info">
+                        <h3>Frutilla</h3>
+                        <p class="price" data-id="price-frut">$27.99</p>
+                        <div class="options">
+                            <div class="label-group">
+                                <label for="pres-frut">Presentación</label>
+                                <select name="presentation-frutilla" id="pres-frut" onchange="updatePrice(this)">
+                                    <option value="500gr" data-price="15.49" data-size="500 gr">500 gr</option>
+                                    <option value="1kg" data-price="27.99" data-size="1 kg" selected>1 kg</option>
+                                    <option value="2kg" data-price="52.99" data-size="2 kg">2 kg</option>
+                                </select>
+                            </div>
+                            <div class="label-group" style="flex-grow: 0;">
+                                <label for="qty-frut">Cant.</label>
+                                <input type="number" id="qty-frut" value="1" min="1" aria-label="Cantidad" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('frut')">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-flavor="Frutos Rojos">
+                    <img src="img/productos/frutos-rojos.jpg" alt="Leche Proteica Sabor Frutos Rojos">
+                    <div class="product-info">
+                        <h3>Frutos Rojos</h3>
+                        <p class="price" data-id="price-frroj">$29.49</p>
+                        <div class="options">
+                            <div class="label-group">
+                                <label for="pres-frroj">Presentación</label>
+                                <select name="presentation-frutos-rojos" id="pres-frroj" onchange="updatePrice(this)">
+                                    <option value="500gr" data-price="16.49" data-size="500 gr">500 gr</option>
+                                    <option value="1kg" data-price="29.49" data-size="1 kg" selected>1 kg</option>
+                                    <option value="2kg" data-price="55.99" data-size="2 kg">2 kg</option>
+                                </select>
+                            </div>
+                            <div class="label-group" style="flex-grow: 0;">
+                                <label for="qty-frroj">Cant.</label>
+                                <input type="number" id="qty-frroj" value="1" min="1" aria-label="Cantidad" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('frroj')">Añadir al Carrito</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-flavor="Capuccino">
+                    <img src="img/productos/capuccino.jpg" alt="Leche Proteica Sabor Capuccino">
+                    <div class="product-info">
+                        <h3>Capuccino</h3>
+                        <p class="price" data-id="price-capu">$29.99</p>
+                        <div class="options">
+                            <div class="label-group">
+                                <label for="pres-capu">Presentación</label>
+                                <select name="presentation-capuccino" id="pres-capu" onchange="updatePrice(this)">
+                                    <option value="500gr" data-price="16.99" data-size="500 gr">500 gr</option>
+                                    <option value="1kg" data-price="29.99" data-size="1 kg" selected>1 kg</option>
+                                    <option value="2kg" data-price="56.99" data-size="2 kg">2 kg</option>
+                                </select>
+                            </div>
+                            <div class="label-group" style="flex-grow: 0;">
+                                <label for="qty-capu">Cant.</label>
+                                <input type="number" id="qty-capu" value="1" min="1" aria-label="Cantidad" style="width: 70px;">
+                            </div>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('capu')">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="beneficios" class="benefits-section">
+            <div class="container">
+                <h2 class="section-title">💪 Potencia tu Rendimiento</h2>
+                <div class="benefits-grid">
+                    
+                    <div class="benefit-card">
+                        <i class="fas fa-dumbbell"></i>
+                        <h4>Máximo Desarrollo Muscular</h4>
+                        <p>Aporta el perfil de aminoácidos completo necesario para la recuperación post-entrenamiento y la hipertrofia.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <i class="fas fa-battery-full"></i>
+                        <h4>Energía Sostenida</h4>
+                        <p>Gracias a su composición balanceada, te brinda energía de liberación lenta, ideal para un día activo.</p>
+                    </div>
+                    
+                    <div class="benefit-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Apoyo al Sistema Inmunológico</h4>
+                        <p>Enriquecida con vitaminas y minerales esenciales que fortalecen tus defensas día a día.</p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <i class="fas fa-utensils"></i>
+                        <h4>Sabor Irresistible</h4>
+                        <p>Diseñada para mezclarse fácilmente con agua o leche sin dejar grumos y con sabores que amarás.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <footer id="contacto">
+            <div class="container" style="text-align: center; padding: 15px 0; background-color: var(--primary-brown); margin-top: 50px;">
+                <a href="admin.html" style="color: #ccc; text-decoration: none; font-size: 0.9rem;">
+                    Administración de Precios
+                </a>
+                <p style="color: #ccc; margin-top: 5px; font-size: 0.8rem;">
+                    © 2025 Proteina Activa. Todos los derechos reservados.
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Estructura de precios por defecto (debe coincidir con admin.html)
+        const DEFAULT_PRICES_DATA = [
+            { id: 'pres-cafe-500gr', price: 15.99 }, { id: 'pres-cafe-1kg', price: 28.99 }, { id: 'pres-cafe-2kg', price: 54.99 },
+            { id: 'pres-choc-500gr', price: 16.99 }, { id: 'pres-choc-1kg', price: 29.99 }, { id: 'pres-choc-2kg', price: 56.99 },
+            { id: 'pres-frut-500gr', price: 15.49 }, { id: 'pres-frut-1kg', price: 27.99 }, { id: 'pres-frut-2kg', price: 52.99 },
+            { id: 'pres-frroj-500gr', price: 16.49 }, { id: 'pres-frroj-1kg', price: 29.49 }, { id: 'pres-frroj-2kg', price: 55.99 },
+            { id: 'pres-capu-500gr', price: 16.99 }, { id: 'pres-capu-1kg', price: 29.99 }, { id: 'pres-capu-2kg', price: 56.99 }
+        ];
+
+        let priceMap = {};
+        
+        // Función central que carga y aplica los precios
+        function loadStorePrices() {
+            const storedPrices = localStorage.getItem('productPrices');
+            let pricesToUse = DEFAULT_PRICES_DATA;
+
+            if (storedPrices) {
+                try {
+                    pricesToUse = JSON.parse(storedPrices);
+                } catch (e) {
+                    console.error("Error al parsear precios de localStorage:", e);
+                    pricesToUse = DEFAULT_PRICES_DATA;
+                }
+            }
+            
+            // Crea un mapa (diccionario) para buscar precios rápidamente por ID
+            priceMap = pricesToUse.reduce((acc, item) => {
+                acc[item.id] = item.price; 
+                return acc;
+            }, {});
+            
+            // Recorre todos los select de productos para actualizar sus precios internos (data-price)
+            document.querySelectorAll('.product-card select').forEach(select => {
+                const flavorCode = select.id.split('-')[1];
+
+                Array.from(select.options).forEach(option => {
+                    const size = option.value;
+                    const idKey = `pres-${flavorCode}-${size}`;
+                    
+                    const newPrice = priceMap[idKey];
+                    if (newPrice !== undefined) {
+                        // Actualiza el atributo 'data-price' de la opción con el precio cargado
+                        option.setAttribute('data-price', newPrice.toFixed(2));
+                    }
+                });
+                
+                // Llama a updatePrice para mostrar el precio de la opción seleccionada por defecto
+                updatePrice(select);
+            });
+        }
+
+
+        // Inicializa el carrito desde localStorage
+        let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        const cartCountElement = document.getElementById('cart-count');
+
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountElement.textContent = count;
+        }
+
+        // Función para actualizar el precio visible cuando cambia la presentación
+        function updatePrice(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const price = selectedOption.getAttribute('data-price'); 
+            const priceDisplay = selectElement.closest('.product-info').querySelector('.price');
+            
+            if (price) {
+                priceDisplay.textContent = `$${parseFloat(price).toFixed(2)}`;
+                priceDisplay.setAttribute('data-current-price', parseFloat(price).toFixed(2));
+            } else {
+                priceDisplay.textContent = `$0.00`; 
+                priceDisplay.setAttribute('data-current-price', '0.00');
+            }
+        }
+
+        // Función para añadir el producto al carrito
+        function addToCart(flavorCode) {
+            const presElement = document.getElementById(`pres-${flavorCode}`);
+            const qtyElement = document.getElementById(`qty-${flavorCode}`);
+
+            const selectedOption = presElement.options[presElement.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute('data-price')); 
+            const size = selectedOption.getAttribute('data-size');
+            
+            const cardElement = presElement.closest('.product-card');
+            const flavor = cardElement.getAttribute('data-flavor');
+            
+            const quantity = parseInt(qtyElement.value);
+
+            if (quantity <= 0) {
+                alert('Por favor, selecciona una cantidad válida.');
+                return;
+            }
+            
+            if (isNaN(price)) {
+                alert('Error: El precio no se ha podido cargar. Intenta recargar la página.');
+                return;
+            }
+
+            const productId = `pres-${flavorCode}-${presElement.value}`; 
+            const existingItemIndex = cart.findIndex(item => item.id === productId);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push({
+                    id: productId,
+                    flavor: flavor,
+                    presentation: size,
+                    price: price, 
+                    quantity: quantity
+                });
+            }
+
+            localStorage.setItem('shoppingCart', JSON.stringify(cart));
+            updateCartCount();
+
+            // Animación visual
+            const cartLinkElement = document.getElementById('cart-link');
+            cartLinkElement.style.transform = 'scale(1.3)';
+            setTimeout(() => {
+                cartLinkElement.style.transform = 'scale(1)';
+            }, 300);
+
+            alert(`${quantity} unidad(es) de ${flavor} (${size}) añadidas. Total en carrito: ${cart.reduce((total, item) => total + item.quantity, 0)}`);
+        }
+
+        function goToCart() {
+            // Cierra la sesión de admin por si el usuario vuelve
+            localStorage.removeItem('adminLoggedIn'); 
+            window.location.href = 'carrito.html';
+        }
+
+        // Inicializar al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStorePrices(); // Carga los precios al iniciar
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
